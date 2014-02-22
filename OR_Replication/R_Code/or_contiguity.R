@@ -34,10 +34,10 @@ x.lo <- x.hi <- cbind(1,
                       median(or$allies),
                       median(or$lcaprat2),
                       dem.lo, 
-                      -1, #noncontg, coded -1, 0
-                      median(or$logdstab[or$noncontg == 0]),
+                      -1, #noncontg, coded -1, 0 # -1 = contig
+                      median(or$logdstab[or$noncontg == -1]),
                       median(or$minrpwrs))
-x.hi[, 5] <- 0 # again, the var is coded -1, 0
+x.hi[, 5] <- 0 # again, the var is coded -1, 0 # 0 = noncontig
 sim.noprod <- coef(sim(m.noprod, n = 1000))
 pred.lo.noprod <- plogis(x.lo%*%t(sim.noprod))
 pred.hi.noprod <- plogis(x.hi%*%t(sim.noprod))
