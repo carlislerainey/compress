@@ -3,10 +3,11 @@ setwd("~/Dropbox/Projects/Compress")
 
 library(arm)
 library(compactr)
+library(foreign)
 
 # Data available at 
 #   http://pantheon.yale.edu/~brusset/io_dta.zip
-or <- read.csv("OR_Replication/Data/or.csv")
+or <- read.dta("OR_Replication/Data/or.dta")
 
 # compute lower democracy score
 or$dem.lo <- apply(cbind(or$demauta, or$demautb), 1, min)
