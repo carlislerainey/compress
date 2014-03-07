@@ -4,6 +4,7 @@ setwd("~/Dropbox/Projects/Compress")
 library(arm)
 library(compactr)
 library(foreign)
+library(texreg)
 
 # Data available at 
 #   http://pantheon.yale.edu/~brusset/io_dta.zip
@@ -13,132 +14,107 @@ or <- read.dta("OR_Replication/Data/or.dta")
 or$dem.lo <- apply(cbind(or$demauta, or$demautb), 1, min)
 
 # glm version of their gee on pp. 314 with no product term
-m.noprod <- glm(dispute1 ~ allies + lcaprat2 + dem.lo + noncontg + logdstab + minrpwrs,
+m.noprod <- glm(dispute1 ~ allies + lcaprat2 + noncontg + dem.lo + logdstab + minrpwrs,
           family = "binomial", data = or)
 
 # glm version of their gee on pp. 314 with no product terms
-m.prod <- glm(dispute1 ~ allies + lcaprat2 + dem.lo*noncontg + dem.lo*logdstab + minrpwrs,
+m.prod <- glm(dispute1 ~ allies + lcaprat2 + noncontg + dem.lo*logdstab + minrpwrs,
           family = "binomial", data = or)
 
 display(m.noprod, detail = TRUE)
 display(m.prod, detail = TRUE)
 BIC(m.noprod, m.prod)
 
-
 ###############################################################
-## Simulate Quantities of Interest
+## Simulate Pr(Conflict) as Democracy Varies
 ###############################################################
 
 ## No Product Term
-dem.lo <- seq(-10, 10, length.out = 100)
+dist <- seq(min(or$logdstab), max(or$logdstab), length.out = 100)
+xlab <- c(10, 100, 1000, 10000) 
+xat <- log(xlab)
 x.lo <- x.hi <- cbind(1, 
                       median(or$allies),
                       median(or$lcaprat2),
-                      dem.lo, 
                       0, #noncontg, coded -1, 0
-                      quantile(or$logdstab[or$noncontg == 0], .25), # log(dist)
+                      -10,
+                      dist, # log(dist)
                       median(or$minrpwrs))
-x.hi[, 6] <- quantile(or$logdstab[or$noncontg == 0], .75) # log.dist
+x.hi[, 5] <- 10 # dem
 sim.noprod <- coef(sim(m.noprod, n = 1000))
 pred.lo.noprod <- plogis(x.lo%*%t(sim.noprod))
 pred.hi.noprod <- plogis(x.hi%*%t(sim.noprod))
 
-## No Product Term
-dem.lo <- seq(-10, 10, length.out = 100)
-x.lo <- cbind(x.lo, x.lo[, 4]*x.lo[, 5], x.lo[, 4]*x.lo[, 6])
-x.hi <- cbind(x.hi, x.hi[, 4]*x.hi[, 5], x.hi[, 4]*x.lo[, 6])
+## Product Term
+x.lo <- cbind(x.lo, x.lo[, 5]*x.lo[, 6])
+x.hi <- cbind(x.hi, x.hi[, 5]*x.hi[, 6])
 sim.prod <- coef(sim(m.prod, n = 1000))
 pred.lo.prod <- plogis(x.lo%*%t(sim.prod))
 pred.hi.prod <- plogis(x.hi%*%t(sim.prod))
 
-# Clean up
-rm(x.lo, x.hi)
-
 ###############################################################
-## Predicted Probabilities Plot
+## Predicted Probabilities Plot as Distance Varies
 ###############################################################
 
 ## Graphical Parameters
-par(mfrow = c(2,2), mar = c(.75,.75,.75,.75), oma = c(3,9,1,1))
-ylim0 <- mm(c(pred.lo.noprod, pred.hi.noprod, pred.lo.prod, pred.hi.prod))
+pdf("Manuscript/Figures/pr_distance.pdf", height = 4, width = 7, family = "serif")
+par(mfrow = c(2,2), mar = c(.75,.75,.75,.75), oma = c(3,9,1,1), family = "serif")
+ylim0 <- mm(c(0, pred.lo.noprod, pred.hi.noprod, pred.lo.prod, pred.hi.prod))
             
 ## Product Term Excluded
-hist(or$dem.lo[or$noncontg == 0], main = NA, axes = FALSE, col = "grey80", border = NA)
+hist(or$logdstab, main = NA, axes = FALSE, col = "grey80", border = NA)
 par(new = TRUE)
-eplot(xlim = mm(dem.lo), ylim = ylim0,
-      xlab = "Lowest Democracy Score",
+eplot(xlim = mm(dist), ylim = ylim0,
+      xlab = "Distance (in Miles)",
       ylab = "Pr(Conflict)",
-      ylabpos = 2.5,
-      main = paste("Non-contiguous States (N = ", sum(or$noncontg == 0), ")", sep = ""))
-lines(dem.lo, apply(pred.hi.noprod, 1, quantile, .05), lty = 2)
-lines(dem.lo, apply(pred.hi.noprod, 1, quantile, .5), lwd = 3)
-lines(dem.lo, apply(pred.hi.noprod, 1, quantile, .95), lty = 2)
-text(-22, sum(ylim0)/2, "Product Term\nExcluded", xpd = NA)
+      ylabpos = 1.9,
+      main = paste("Democracies"),
+      xat = xat,
+      xticklab = xlab)
+lines(dist, apply(pred.hi.noprod, 1, quantile, .05), lty = 2)
+lines(dist, apply(pred.hi.noprod, 1, quantile, .5), lwd = 3)
+lines(dist, apply(pred.hi.noprod, 1, quantile, .95), lty = 2)
+text(-1.8, sum(ylim0)/2, "Product Term\nExcluded", xpd = NA)
 
-hist(or$dem.lo[or$noncontg == -1], main = NA, axes = FALSE, col = "grey80", border = NA)
+hist(or$logdstab, main = NA, axes = FALSE, col = "grey80", border = NA)
 par(new = TRUE)
-eplot(xlim = mm(dem.lo), ylim = ylim0,
-      xlab = "Lowest Democracy Score",
+eplot(xlim = mm(dist), ylim = ylim0,
+      xlab = "Distance (in Miles)",
       ylab = "Pr(Conflict)",
-      ylabpos = 2.5,
-      main = paste("Contiguous States (N = ", sum(or$noncontg == -1), ")", sep = ""))
-lines(dem.lo, apply(pred.lo.noprod, 1, quantile, .05), lty = 2)
-lines(dem.lo, apply(pred.lo.noprod, 1, quantile, .5), lwd = 3)
-lines(dem.lo, apply(pred.lo.noprod, 1, quantile, .95), lty = 2)
+      ylabpos = 1.9,
+      main = paste("Non-Democracies"),
+      xat = xat,
+      xticklab = xlab)
+lines(dist, apply(pred.lo.noprod, 1, quantile, .05), lty = 2)
+lines(dist, apply(pred.lo.noprod, 1, quantile, .5), lwd = 3)
+lines(dist, apply(pred.lo.noprod, 1, quantile, .95), lty = 2)
 
 ## Product Term Included
-hist(or$dem.lo[or$noncontg == 0], main = NA, axes = FALSE, col = "grey80", border = NA)
+hist(or$logdstab, main = NA, axes = FALSE, col = "grey80", border = NA)
 par(new = TRUE)
-eplot(xlim = mm(dem.lo), ylim = ylim0,
-      xlab = "Lowest Democracy Score",
+eplot(xlim = mm(dist), ylim = ylim0,
+      xlab = "Distance (in Miles)",
       ylab = "Pr(Conflict)",
-      ylabpos = 2.5)
-lines(dem.lo, apply(pred.hi.prod, 1, quantile, .05), lty = 2)
-lines(dem.lo, apply(pred.hi.prod, 1, quantile, .5), lwd = 3)
-lines(dem.lo, apply(pred.hi.prod, 1, quantile, .95), lty = 2)
-text(-22, sum(ylim0)/2, "Product Term\nIncluded", xpd = NA)
+      ylabpos = 1.9,
+      xat = xat,
+      xticklab = xlab)
+lines(dist, apply(pred.hi.prod, 1, quantile, .05), lty = 2)
+lines(dist, apply(pred.hi.prod, 1, quantile, .5), lwd = 3)
+lines(dist, apply(pred.hi.prod, 1, quantile, .95), lty = 2)
+text(-1.8, sum(ylim0)/2, "Product Term\nIncluded", xpd = NA)
 
-hist(or$dem.lo[or$noncontg == -1], main = NA, axes = FALSE, col = "grey80", border = NA)
+hist(or$logdstab, main = NA, axes = FALSE, col = "grey80", border = NA)
 par(new = TRUE)
-eplot(xlim = mm(dem.lo), ylim = ylim0,
-      xlab = "Lowest Democracy Score",
+eplot(xlim = mm(dist), ylim = ylim0,
+      xlab = "Distance (in Miles)",
       ylab = "Pr(Conflict)",
-      ylabpos = 2.5)
-lines(dem.lo, apply(pred.lo.prod, 1, quantile, .05), lty = 2)
-lines(dem.lo, apply(pred.lo.prod, 1, quantile, .5), lwd = 3)
-lines(dem.lo, apply(pred.lo.prod, 1, quantile, .95), lty = 2)
-
-###############################################################
-## First Difference as Democracy Varies Plot (No Product Term)
-###############################################################
-
-## Graphical Parameters
-par(mfrow = c(1,2), mar = c(.75,.75,.75,.75), oma = c(3,4,1,1))
-ylim0 <- mm(c(pred.lo.noprod - pred.hi.noprod, pred.lo.noprod - pred.hi.noprod))
-
-## No Product Term
-hist(or$dem.lo, main = NA, axes = FALSE, col = "grey80", border = NA)
-par(new = TRUE)
-eplot(xlim = mm(dem.lo), ylim = ylim0,
-      xlab = "Lowest Democracy Score",
-      ylab = "Effect of Contiguity\non Pr(Conflict)",
-      ylabpos = 2.5,
-      main = "No Product Term")
-lines(dem.lo, apply(pred.lo.noprod - pred.hi.noprod, 1, quantile, .05), lty = 2)
-lines(dem.lo, apply(pred.lo.noprod - pred.hi.noprod, 1, quantile, .5), lwd = 3)
-lines(dem.lo, apply(pred.lo.noprod - pred.hi.noprod, 1, quantile, .95), lty = 2)
-
-## Product Term
-hist(or$dem.lo, main = NA, axes = FALSE, col = "grey80", border = NA)
-par(new = TRUE)
-eplot(xlim = mm(dem.lo), ylim = ylim0,
-      xlab = "Lowest Democracy Score",
-      ylab = "Effect of Contiguity\non Pr(Conflict)",
-      ylabpos = 2.5,
-      main = "Product Term")
-lines(dem.lo, apply(pred.lo.prod - pred.hi.prod, 1, quantile, .05), lty = 2)
-lines(dem.lo, apply(pred.lo.prod - pred.hi.prod, 1, quantile, .5), lwd = 3)
-lines(dem.lo, apply(pred.lo.prod - pred.hi.prod, 1, quantile, .95), lty = 2)
+      ylabpos = 1.9,
+      xat = xat,
+      xticklab = xlab)
+lines(dist, apply(pred.lo.prod, 1, quantile, .05), lty = 2)
+lines(dist, apply(pred.lo.prod, 1, quantile, .5), lwd = 3)
+lines(dist, apply(pred.lo.prod, 1, quantile, .95), lty = 2)
+dev.off()
 
 ###############################################################
 ## Calculate Second-Difference and Plot CIs
@@ -155,7 +131,8 @@ sd.prod <- fd.prod[nrow(fd.prod), ] - fd.prod[1, ] # min-max second difference
 q.sd.prod <- quantile(sd.prod, c(.05, .5, .95))
 
 ## Graphical Parameters
-par(mfrow = c(1,1), mar = c(.75,.75,.75,.75), oma = c(3,1,1,1))
+pdf("Manuscript/Figures/sd_distance.pdf", height = 2.5, width = 4.5, family = "serif")
+par(mfrow = c(1,1), mar = c(.75,.75,.75,.75), oma = c(3,1,1,1), family = "serif")
 xlim0 <- mm(c(0, q.sd.noprod, q.sd.prod))
 
 ## Plot CIs
@@ -171,4 +148,90 @@ points(q.sd.prod[2], 2, pch = 19, cex = .7)
 text(q.sd.prod[2], 2, "Product Term Included", pos = 3, cex = .7)
 lines(q.sd.prod[c(1, 3)], c(2, 2), lwd = 2)
 abline(v = 0, lty = 2)
+dev.off()
 
+###############################################################
+## Print Regression Tables
+###############################################################
+
+texreg(list(m.noprod, m.prod),
+          custom.model.names = c("No Product Term", "Product Term"),
+          custom.coef.names = c("Constant",
+                                "Allies",
+                                "Power Ratio",
+                                "Noncontiguity",
+                                "Lower Democracy",
+                                "Log(Distance)",
+                                "Only Minor Powers",
+                                "Lower Democracy $\\times$ Log(Distance)"),
+          digits = 3, reorder.coef = c(5, 6, 8, 2, 3, 4, 7, 1),
+          include.loglik = FALSE, include.deviance = FALSE)
+
+
+###############################################################
+## Simulate Pr(Conflict) as Distance Varies
+###############################################################
+
+## No Product Term
+dem.lo <- seq(min(or$dem.lo), max(or$dem.lo), length.out = 100)
+xlab <- c(-10, -5, 0, 5, 10)
+xat <- xlab
+x.lo <- x.hi <- cbind(1, 
+                      median(or$allies),
+                      median(or$lcaprat2),
+                      0, #noncontg, coded -1, 0
+                      dem.lo,
+                      quantile(or$logdstab, .25), # log(dist)
+                      median(or$minrpwrs))
+x.hi[, 6] <- quantile(or$logdstab, .75) # dem
+sim.noprod <- coef(sim(m.noprod, n = 1000))
+pred.lo.noprod <- plogis(x.lo%*%t(sim.noprod))
+pred.hi.noprod <- plogis(x.hi%*%t(sim.noprod))
+
+## Product Term
+x.lo <- cbind(x.lo, x.lo[, 5]*x.lo[, 6])
+x.hi <- cbind(x.hi, x.hi[, 5]*x.hi[, 6])
+sim.prod <- coef(sim(m.prod, n = 1000))
+pred.lo.prod <- plogis(x.lo%*%t(sim.prod))
+pred.hi.prod <- plogis(x.hi%*%t(sim.prod))
+
+# Clean up
+rm(x.lo, x.hi)
+
+###############################################################
+## First Difference as Democracy Varies Plot (No Product Term)
+###############################################################
+
+## Graphical Parameters
+pdf("Manuscript/Figures/fd_democracy.pdf", height = 2.5, width = 6, family = "serif")
+par(mfrow = c(1,2), mar = c(.75,.75,.75,.75), oma = c(3,4,1,1), family = "serif")
+ylim0 <- mm(c(0, pred.hi.noprod - pred.lo.noprod, pred.hi.noprod - pred.lo.noprod))
+
+## No Product Term
+hist(or$dem.lo, main = NA, axes = FALSE, col = "grey80", border = NA)
+par(new = TRUE)
+eplot(xlim = mm(dem.lo), ylim = ylim0,
+      xlab = "Smaller Democracy Score",
+      ylab = "Pr(Conflict)",
+      ylabpos = 2.5,
+      xat = xat,
+      xticklab = xlab,
+      main = "Product Term Excluded")
+lines(dem.lo, apply(pred.hi.noprod - pred.lo.noprod, 1, quantile, .05), lty = 2)
+lines(dem.lo, apply(pred.hi.noprod - pred.lo.noprod, 1, quantile, .5), lwd = 3)
+lines(dem.lo, apply(pred.hi.noprod - pred.lo.noprod, 1, quantile, .95), lty = 2)
+
+## Product Term
+hist(or$dem.lo, main = NA, axes = FALSE, col = "grey80", border = NA)
+par(new = TRUE)
+eplot(xlim = mm(dem.lo), ylim = ylim0,
+      xlab = "Smaller Democracy Score",
+      ylab = "Pr(Conflict)",
+      ylabpos = 2.5,
+      xat = xat,
+      xticklab = xlab,
+      main = "Product Term Included")
+lines(dem.lo, apply(pred.hi.prod - pred.lo.prod, 1, quantile, .05), lty = 2)
+lines(dem.lo, apply(pred.hi.prod - pred.lo.prod, 1, quantile, .5), lwd = 3)
+lines(dem.lo, apply(pred.hi.prod - pred.lo.prod, 1, quantile, .95), lty = 2)
+dev.off()
