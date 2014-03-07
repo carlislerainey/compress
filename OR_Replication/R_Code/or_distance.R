@@ -117,6 +117,44 @@ lines(dist, apply(pred.lo.prod, 1, quantile, .95), lty = 2)
 dev.off()
 
 ###############################################################
+## First Difference as Distance Varies Plot (No Product Term)
+###############################################################
+
+## Graphical Parameters
+pdf("Manuscript/Figures/fd_distance.pdf", height = 2.5, width = 6, family = "serif")
+par(mfrow = c(1,2), mar = c(.75,.75,.75,.75), oma = c(3,4,1,1), family = "serif")
+ylim0 <- mm(c(0, pred.hi.noprod - pred.lo.noprod, pred.hi.noprod - pred.lo.noprod))
+
+## No Product Term
+hist(or$logdstab, main = NA, axes = FALSE, col = "grey80", border = NA)
+par(new = TRUE)
+eplot(xlim = mm(dist), ylim = ylim0,
+      xlab = "Distance (in Miles)",
+      ylab = "Pr(Conflict)",
+      ylabpos = 2.3,
+      xat = xat,
+      xticklab = xlab,
+      main = "Product Term Excluded")
+lines(dist, apply(pred.hi.noprod - pred.lo.noprod, 1, quantile, .05), lty = 2)
+lines(dist, apply(pred.hi.noprod - pred.lo.noprod, 1, quantile, .5), lwd = 3)
+lines(dist, apply(pred.hi.noprod - pred.lo.noprod, 1, quantile, .95), lty = 2)
+
+## Product Term
+hist(or$logdstab, main = NA, axes = FALSE, col = "grey80", border = NA)
+par(new = TRUE)
+eplot(xlim = mm(dist), ylim = ylim0,
+      xlab = "Distance (in Miles)",
+      ylab = "Pr(Conflict)",
+      ylabpos = 2.3,
+      xat = xat,
+      xticklab = xlab,
+      main = "Product Term Included")
+lines(dist, apply(pred.hi.prod - pred.lo.prod, 1, quantile, .05), lty = 2)
+lines(dist, apply(pred.hi.prod - pred.lo.prod, 1, quantile, .5), lwd = 3)
+lines(dist, apply(pred.hi.prod - pred.lo.prod, 1, quantile, .95), lty = 2)
+dev.off()
+
+###############################################################
 ## Calculate Second-Difference and Plot CIs
 ###############################################################
 
