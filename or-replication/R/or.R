@@ -8,7 +8,7 @@ library(texreg)
 
 # Data available at 
 #   http://pantheon.yale.edu/~brusset/io_dta.zip
-or <- read.dta("OR_Replication/Data/or.dta")
+or <- read.dta("or-replication/data/or.dta")
 
 # compute lower democracy score
 or$dem.lo <- apply(cbind(or$demauta, or$demautb), 1, min)
@@ -57,7 +57,7 @@ pred.hi.prod <- plogis(x.hi%*%t(sim.prod))
 ###############################################################
 
 ## Graphical Parameters
-pdf("Manuscript/Figures/pr_distance.pdf", height = 4, width = 7, family = "serif")
+pdf("doc/fig/fig-pr-distance.pdf", height = 4, width = 7, family = "serif")
 par(mfrow = c(2,2), mar = c(.75,.75,.75,.75), oma = c(3,9,1,1), family = "serif")
 ylim0 <- mm(c(0, pred.lo.noprod, pred.hi.noprod, pred.lo.prod, pred.hi.prod))
             
@@ -121,7 +121,7 @@ dev.off()
 ###############################################################
 
 ## Graphical Parameters
-pdf("Manuscript/Figures/fd_distance.pdf", height = 2.5, width = 6, family = "serif")
+pdf("doc/fig/fig-fd-distance.pdf", height = 2.5, width = 6, family = "serif")
 par(mfrow = c(1,2), mar = c(.75,.75,.75,.75), oma = c(3,4,1,1), family = "serif")
 ylim0 <- mm(c(0, pred.hi.noprod - pred.lo.noprod, pred.hi.noprod - pred.lo.noprod))
 
@@ -169,7 +169,7 @@ sd.prod <- fd.prod[nrow(fd.prod), ] - fd.prod[1, ] # min-max second difference
 q.sd.prod <- quantile(sd.prod, c(.05, .5, .95))
 
 ## Graphical Parameters
-pdf("Manuscript/Figures/sd_distance.pdf", height = 2.5, width = 4.5, family = "serif")
+pdf("doc/fig/fig-sd-distance.pdf", height = 2.5, width = 4.5, family = "serif")
 par(mfrow = c(1,1), mar = c(.75,.75,.75,.75), oma = c(3,1,1,1), family = "serif")
 xlim0 <- mm(c(0, q.sd.noprod, q.sd.prod))
 
@@ -241,7 +241,7 @@ rm(x.lo, x.hi)
 ###############################################################
 
 ## Graphical Parameters
-pdf("Manuscript/Figures/fd_democracy.pdf", height = 2.5, width = 6, family = "serif")
+pdf("doc/fig/fig-fd-democracy.pdf", height = 2.5, width = 6, family = "serif")
 par(mfrow = c(1,2), mar = c(.75,.75,.75,.75), oma = c(3,4,1,1), family = "serif")
 ylim0 <- mm(c(0, pred.hi.noprod - pred.lo.noprod, pred.hi.noprod - pred.lo.noprod))
 
