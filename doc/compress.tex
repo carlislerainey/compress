@@ -265,7 +265,7 @@ Because $X$ is approximately uniformly distributed from zero to one and $Z$ is d
 
 \begin{figure}[H]
 \begin{center}
-\includegraphics[width=\linewidth]{Figures/fig_example.pdf}
+\includegraphics[width=\linewidth]{fig/fig_example.pdf}
 %\vspace{-10mm}
 \end{center}
 \caption{This figure shows the true relationship in the first simulation study (dotted lines) as well as how logistic regression models with and without a product term fit the process (solid, bold lines). Notice that $X$ and $Z$ have large effects on $\text{Pr}(Y)$ and $\text{Pr}(Y)$ is always less than 0.5. In this case, excluding a product term forces the model to point toward interaction, despite the fact that the relationship is non-interactive. Including a product term allows the model to fit this non-interactive process surprisingly well.}\label{fig:relationships_fits}
@@ -281,7 +281,7 @@ To help understand why excluding a product term biases the researcher toward fin
 
 \begin{figure}[h]
 \begin{center}
-\includegraphics[scale=.7]{Figures/fig_plotted_cis.pdf}
+\includegraphics[scale=.7]{fig/fig_plotted_cis.pdf}
 %\vspace{-10mm}
 \end{center}
 \caption{This figure shows fifty simulations of estimated second-differences and confidence intervals using models with and without a product term. Although second-difference is actually zero (a non-interactive relationship), the model with no product term consistently finds interaction. Including a product term removes almost all of this bias.}\label{fig:plotted_cis}
@@ -294,7 +294,7 @@ from nearly 1.00 (the worst  situation) to about 0.05 (the ideal situation).\foo
 
 \begin{figure}
 \begin{center}
-\includegraphics[width=\linewidth]{Figures/fig_sm.pdf}
+\includegraphics[width=\linewidth]{fig/fig_sm.pdf}
 \end{center}
 \caption{This figure shows the probability of concluding interaction when the true relationship is given by $\text{Pr}(Y) = 0.3 + 0.2X - 0.3Z$ (i.e., there is no interaction) using logistic regression models with and without a product term as the sample size, the distribution of $X$, and the change in $X$ considered in computing the second-difference varies. Notice that the model including a product term performs remarkably well, although the improvement diminishes as the simple size gets large, especially when the distribution of $X$ is skewed and the researcher considers the effect of changing $X$ nears its extremes.}\label{fig:sm}
 \end{figure}
@@ -318,7 +318,7 @@ This suggests that including a product term can eliminate most of the bias towar
 
 \begin{figure}[h]
 \begin{center}
-\includegraphics[scale = .7]{Figures/fig_hist.pdf}
+\includegraphics[scale = .7]{fig/fig_hist.pdf}
 \end{center}\caption{The histogram on the left shows that logistic regression models without a product term tend to find interaction when none exists. The histogram on the right shows researchers can eliminate most of this bias by simply including a product term.}\label{fig:hist}
 \end{figure}
 
@@ -326,7 +326,7 @@ Figure \ref{fig:scatter} directly compares the two approaches. Notice that every
  
 \begin{figure}[H]
 \begin{center}
-\includegraphics[scale = .9]{Figures/fig_scatter2.pdf}
+\includegraphics[scale = .9]{fig/fig_scatter2.pdf}
 \end{center}\caption{This figure shows the probability of concluding interaction when none exists from logistic regression models with and without a product term for many different analyses. Notice that many points fall away from the vertical line at 0.05 indicating poor performance of models without a product term. Also notice that most points fall near the horizontal line at 0.05, indicating that models with a product term tend to perform well. Finally, notice that  all points fall below the diagonal line, indicating that models without a product term are more likely to mislead researchers in every simulated analysis.}\label{fig:scatter}
 \end{figure}
 
@@ -372,7 +372,7 @@ Figure \ref{fig:pr_distance} provides a nice overview of the intuition and the e
 
         \begin{figure}[H]
         \begin{center}
-        \includegraphics[scale = .8]{Figures/pr_distance.pdf}
+        \includegraphics[scale = .8]{fig/pr_distance.pdf}
         \end{center}\caption{This figure compares the estimated probability of conflict in democracies (Polity IV score of 10) and non-democracies (Polity IV score of -10) from models with and without a product term. Notice that, as expected, there is a much smaller change in the probability of conflict in democracies. However, the model with no product term forces this pattern of compression into the estimates. The model including a product term allows the model to represent non-interactive relationships as well. Because of this, the estimates from the model with a product term are more compelling.}\label{fig:pr_distance}
         \end{figure}
 
@@ -380,7 +380,7 @@ While the pattern of the predicted probabilities is consistent with the three hy
 
         \begin{figure}[H]
         \begin{center}
-        \includegraphics[scale = .8]{Figures/fd_distance.pdf}
+        \includegraphics[scale = .8]{fig/fd_distance.pdf}
         \end{center}\caption{This figure shows how the negative effect of distance on the probability of conflict shrinks toward zero as dyads become more democratic. This expected pattern is consistent with compression, but the model without a product term forces this pattern into the results while the model with a product term allows other types of relationships to emerge.}\label{fig:fd_distance}
         \end{figure}
 
@@ -388,7 +388,7 @@ Next, Figure \ref{fig:fd_democracy} plots the effect of moving from a ``nearby d
         
                 \begin{figure}[H]
         \begin{center}
-        \includegraphics[scale = .8]{Figures/fd_democracy.pdf}
+        \includegraphics[scale = .8]{fig/fd_democracy.pdf}
         \end{center}\caption{This figure shows how the negative effect of distance on the probability of conflict shrinks toward zero as dyads become more democratic. This expected pattern is consistent with compression, but the model without a product term forces this pattern into the results while the model with a product term allows other types of relationships to emerge.}\label{fig:fd_democracy}
         \end{figure}
 
@@ -396,7 +396,7 @@ Finally, and most importantly for my purposes, Figure \ref{fig:sd_distance} show
 
         \begin{figure}[h]
         \begin{center}
-        \includegraphics[scale = .8]{Figures/sd_distance.pdf}
+        \includegraphics[scale = .8]{fig/sd_distance.pdf}
         \end{center}\caption{This figure shows the estimated second-differences from both the models with and without a product term. While the estimates are similar, the results from the model with a product term are more compelling, because excluding a product term strongly biases the second-differences away from zero (see the left panel of Figure \ref{fig:plotted_cis}), while including removes most of this bias (see the right panel of Figure \ref{fig:plotted_cis}). }\label{fig:sd_distance}
         \end{figure}
 
@@ -439,7 +439,7 @@ Notice that for trivial amounts of interaction (i.e., $\Delta\Delta = 0.07-0.09 
 
 \begin{figure}[H]
 \begin{center}
-\includegraphics[scale = .8]{Figures/pwr.pdf}
+\includegraphics[scale = .8]{fig/pwr.pdf}
 \end{center}\caption{A figure showing the statistical power of models including a product term (dashed line) and excluding a product term (solid line) for detecting interaction. Notice that adding a product term decreases the power appreciably only for trivially small interaction effects (i.e., $\Delta\Delta = 0.07-0.09 = -0.02$).}\label{fig:pwr}
 \end{figure}
 
@@ -449,7 +449,7 @@ Particularly given the application of my ideas to the probability of conflict, o
 
 \begin{figure}[H]
 \begin{center}
-\includegraphics[width=\linewidth]{Figures/fig_example_few1s.pdf}
+\includegraphics[width=\linewidth]{fig/fig_example_few1s.pdf}
 %\vspace{-10mm}
 \end{center}
 \caption{This figure shows the true relationship in the ``rare events''  simulation study (dotted lines) as well as how logistic regression models with and without a product term fit the process (solid, bold lines). Notice that $X$ and $Z$ have small effects on $\text{Pr}(Y)$ and $\text{Pr}(Y)$ is always less than 0.1. In this case, excluding a product term forces the model to point toward interaction, despite the fact that the relationship is non-interactive. Including a product term allows the model to fit this non-interactive process surprisingly well. I use this process as a simple robustness check for the results presented in Figure \ref{fig:sm}.}\label{fig:relationships_fits_few1s}
@@ -459,7 +459,7 @@ Figure \ref{fig:sm_few1s} presents the results from the fixed ``rare events'' pr
 
 \begin{figure}[H]
 \begin{center}
-\includegraphics[scale = .8]{Figures/fixed_few1s_update.pdf}
+\includegraphics[scale = .8]{fig/fixed_few1s_update.pdf}
 \end{center}\caption{This figure shows the probability of concluding interaction when the true relationship is given by $\text{Pr}(Y) = 0.04 + 0.04X - 0.02Z$ (i.e., there is no interaction) using logistic regression models with and without a product term as the sample size, the distribution of $X$, and the change in $X$ considered in computing the second-difference varies. Notice that the model including a product term performs remarkably well, removing almost all of the bias except for extremely large samples. }\label{fig:sm_few1s}
 \end{figure}
 
@@ -530,20 +530,20 @@ Percentile & Sample Size \\
 
         \begin{figure}[h]
         \begin{center}
-        \includegraphics[width = \linewidth]{Figures/fig_choose_relationship.pdf}
+        \includegraphics[width = \linewidth]{fig/fig_choose_relationship.pdf}
         \end{center}\caption{This figure graphically illustrates how I generate random relationships that are non-interactive and non-linear using the procedure describe in Step 1.}\label{fig:choose_relationship}
         \end{figure}
         
  
               \begin{figure}[h]
         \begin{center}
-        \includegraphics[width = \linewidth]{Figures/fig_relationship_sample.pdf}
+        \includegraphics[width = \linewidth]{fig/fig_relationship_sample.pdf}
         \end{center}\caption{This figure shows several relationships randomly generated using the steps described in Figure \ref{fig:choose_relationship} and Step 1 of the algorithm above. The three lines represent the relationship between $X$ and $\text{Pr}(Y)$ when $Z$ equals zero, one-half, and one, respectively. Due to the assumption of monotonicity described in Step 1(f), the line for which $Z = 0.5$ must fall between the other two.}\label{fig:relationship_sample}
         \end{figure}
         
                                 \begin{figure}[h]
         \begin{center}
-        \includegraphics[width = \linewidth]{Figures/fig_distribution_sample.pdf}
+        \includegraphics[width = \linewidth]{fig/fig_distribution_sample.pdf}
         \end{center}\caption{This figure shows several possible continuous distributions of $X$ (or $Z$) randomly generated using Step 3(b). }\label{fig:distribution_sample}
         \end{figure}
         
