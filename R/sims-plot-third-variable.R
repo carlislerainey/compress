@@ -30,7 +30,7 @@ X.pred <- cbind(0, 0, c(.25, .75))
 colnames(X.pred) <- c("x", "z", "w")
 X.pred <- data.frame(X.pred)
 
-n.sims <- 100000
+n.sims <- 10000
 fd1 <- fd2 <- numeric(n.sims)
 est1 <- est2 <- numeric(n.sims)
 pb <- txtProgressBar(min = 0, max = n.sims, style = 3)
@@ -66,7 +66,7 @@ lines(b.w, mu.est2, col = "black", lty = 1)
 text(.5, -.5, "Estimated coefficients for W for models\nwith and without the term XZ overlap.", cex = .7)
 dev.off()
 
-pdf("doc/fig/fig-w-fd.pdf", height = 3, width = 4)
+pdf("doc/fig/fig-w-fd.pdf", height = 4, width = 5, family = "serif")
 eplot(xlim = mm(c(mu.fd1, mu.fd2)), ylim = mm(c(mu.fd1, mu.fd2)),
       xlab = "True First-Difference for W",
       ylab = "Estimated First-Difference for W", 
