@@ -426,7 +426,7 @@ When researchers are interested in how explanatory variables interact in influen
 \begin{center}
 \LARGE{\textbf{Online Appendix}}\vspace{4mm}
 \end{center}
-\section*{Statistical Power}
+\section{Statistical Power}
 
 Including a product term does reduce statistical power in tests of interaction using second-differences. If the researcher is correct and there is interaction due to compression (i.e., the logistic regression model is correct), then including a product term reduces the probability that the researcher will find a statistically significant interaction effect (i.e., the confidence interval for the second-difference does not contain zero). However, as I explain in the main text, statistical arguments proceed by fixing the size of the test at a suitably small value (usually 0.05) and then maximizing power. Maximizing power by increasing the size of one's test over-represents the evidence for one's hypotheses because readers expect the researcher to only accept their research hypothesis when the evidence overwhelmingly supports it. If power is maximized at the expense of size, then researchers accept their research hypothesis unless their is overwhelming evidence against it. Thus, I focus on the size of tests for interaction in the main text. Nonetheless, attentive researchers are conscious of the power of their tests, so I conduct a brief analysis here.
 
@@ -442,7 +442,7 @@ Notice that for trivial amounts of interaction (i.e., $\Delta\Delta = 0.07-0.09 
 \end{center}\caption{A figure showing the statistical power of models including a product term (dashed line) and excluding a product term (solid line) for detecting interaction. Notice that adding a product term decreases the power appreciably only for trivially small interaction effects (i.e., $\Delta\Delta = 0.07-0.09 = -0.02$).}\label{fig:pwr}
 \end{figure}
 
-\section*{The Impact of Including an Unnecessary Product Term on Estimates of Effects of Other Variables}
+\section{The Impact of Including an Unnecessary Product Term on Estimates of Effects of Other Variables}
 
 One potential concern is that if the correct model is given by $\text{Pr}(Y) = \text{logit}^{-1}(\beta_{cons} + \beta_XX + \beta_ZZ + \beta_{W}W)$, then including an unnecessary interaction term $XZ$ will lead to biased estimates of the effect of other variables, such as $W$. Simulations show that this is not the case. No bias exists in estimates of the coefficient $\beta_W$ or the first difference $\text{Pr}(Y | W = w_{hi}) - \text{Pr}(Y | W = w_{lo})$. I only summarize a brief simulation here, but these result are identical for a range of other simulations I performed.
 
@@ -480,7 +480,7 @@ As Figure \ref{fig:w-est} shows, the estimates of $\beta_W$ are not affected by 
 \end{center}\caption{A figure showing the expected estimate of the first-difference as the true first-difference changes for the models with and without a product term. Note that all three overlap exactly, which means that including a product term does not bias the first-differences of other explanatory variables.}\label{fig:w-fd}
 \end{figure}
 
-\section*{Replication of the Fixed Process Simulation for Rare Events}
+\section{Replication of the Fixed Process Simulation for Rare Events}
 
 Particularly given the application of my ideas to the probability of conflict, one might wonder whether including a product term removes the bias as effectively when the event of interest is relatively rare. As a simple test case, I use the process $\text{Pr}(Y) = 0.04 + 0.04X - 0.02Z$, shown in Figure \ref{fig:relationships-fits-few1s} as a robustness check to the fixed process presented in Figure \ref{fig:relationships-fits}. Notice, as before, that the model with a product term fits this non-interactive process surprisingly well and the model with no product term forces interaction into the estimates.
 
@@ -500,7 +500,7 @@ Figure \ref{fig:fixed-few1s} presents the results from the fixed ``rare events''
 \end{center}\caption{This figure shows the probability of concluding interaction when the true relationship is given by $\text{Pr}(Y) = 0.04 + 0.04X - 0.02Z$ (i.e., there is no interaction) using logistic regression models with and without a product term as the sample size, the distribution of $X$, and the change in $X$ considered in computing the second-difference varies. Notice that the model including a product term performs remarkably well, removing almost all of the bias except for extremely large samples. }\label{fig:fixed-few1s}
 \end{figure}
 
-\section*{Generate a Random Analysis}
+\section{Generate a Random Analysis}
 
 \begin{enumerate}
 \item Choose a random relationship that is non-linear and non-interactive.
@@ -540,8 +540,6 @@ Figure \ref{fig:fixed-few1s} presents the results from the fixed ``rare events''
                 \item Repeat for $Z$.
                 \end{enumerate}
 \end{enumerate}
-
-%%% Appendix Figures
 
 \begin{table}[h]
 \begin{center}
