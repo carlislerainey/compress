@@ -252,7 +252,7 @@ But why focus specifically on what happens if the researcher is wrong? Why not l
 
 Hypothesis test form compelling statistical arguments because, by design, they rarely lead a researcher to reject the null hypothesis when they null hypothesis is true. This is because hypothesis tests are constructed by fixing $\alpha = \text{Pr}(\text{reject null} | \text{null is true})$  at an acceptably low value, typically $\alpha = 0.05$. This is important because researchers and readers interpret decision to reject the null hypothesis as strong evidence against the null hypothesis (or for the research hypothesis).
 
-Social scientists typically use hypothesis tests because they want to conclude that their research hypothesis is correct \underline{only} when the data offer strong evidence in favor of their research hypothesis (or equivalently, against their null hypothesis). If a test is improperly sized (e.g., $\alpha = 0.75$), then the decision to reject the null hypothesis is no longer compelling. Making matters worse, readers and reviewers are still likely to interpret the results of this over-sized test as compelling. I focus squarely on the size of tests for interaction because the logic of hypothesis testing requires that the size be fixed at a suitably small value, usually 0.05 in the social sciences, while allowing the power of a test to fluctuate with other variables, such as the number of observations. My primary focus on size, or false-positive errors, such not be taken as meaning that power is unimportant. To address the secondary issue of power, I include a discussion of the statistical power of models that exclude and include product term in the Appendix. 
+Social scientists typically use hypothesis tests because they want to conclude that their research hypothesis is correct \underline{only} when the data offer strong evidence in favor of their research hypothesis (or equivalently, against their null hypothesis). If a test is improperly sized (e.g., $\alpha = 0.75$), then the decision to reject the null hypothesis is no longer compelling. Making matters worse, readers and reviewers are still likely to interpret the results of this over-sized test as compelling. I focus squarely on the size of tests for interaction because the logic of hypothesis testing requires that the size be fixed at a suitably small value, usually 0.05 in the social sciences, while allowing the power of a test to fluctuate with other variables, such as the number of observations. My primary focus on size, or false-positive errors, such not be taken as meaning that power is unimportant. To address the secondary issue of power, I include a discussion of the statistical power of models that exclude and include product term in the Appendix.\footnote{These simulations reported in the Appendix show that the ability of a model with a product term to ``detect'' an interactive relationship (i.e., statistical power) is nearly equal if the amount of interaction is substantial or the sample size is large. However, it is important to point out that when the sample size is small (e.g., less than 1,000) \textit{and} the amount of interaction is small (e.g., second-difference of $0.04 - 0.09 = -0.05$), then including a product term might lead to a substantial drop in statistical power. However, it is important to note that the gain in statistical power comes from \textit{assuming} an interactive relationship, not \textit{detecting} one.} One might also worry about the impact of including a potentially unnecessary product term $XZ$ in the model (i.e., $\beta_{XZ} = 0$) on the estimated effects of other variables in the model. In the Appendix, I show that including an unnecessary product term leads to no bias in the estimated coefficients for $W$ or the first differences as $W$ moves from a low value to a high value.
 
 \subsection*{Study \#1: A Fixed Relationship} 
 
@@ -440,6 +440,44 @@ Notice that for trivial amounts of interaction (i.e., $\Delta\Delta = 0.07-0.09 
 \begin{center}
 \includegraphics[scale = .8]{fig/fig-pwr.pdf}
 \end{center}\caption{A figure showing the statistical power of models including a product term (dashed line) and excluding a product term (solid line) for detecting interaction. Notice that adding a product term decreases the power appreciably only for trivially small interaction effects (i.e., $\Delta\Delta = 0.07-0.09 = -0.02$).}\label{fig:pwr}
+\end{figure}
+
+\section*{The Impact of Including an Unnecessary Product Term on Estimates of Effects of Other Variables}
+
+One potential concern is that if the correct model is given by $\text{Pr}(Y) = \text{logit}^{-1}(\beta_{cons} + \beta_XX + \beta_ZZ + \beta_{W}W)$, then including an unnecessary interaction term $XZ$ will lead to biased estimates of the effect of other variables, such as $W$. Simulations show that this is not the case. No bias exists in estimates of the coefficient $\beta_W$ or the first difference $\text{Pr}(Y | W = w_{hi}) - \text{Pr}(Y | W = w_{lo})$. I only summarize a brief simulation here, but these result are identical for a range of other simulations I performed.
+
+\begin{enumerate}
+\item Set $N = 1000$. Setting the sample size to other values has no impact on the results.
+\item Set $\beta_{cons} = 0$ and $\beta_X = \beta_Z = 1$. Setting these coefficients to other values has no impact on the results.
+\item Draw $X$, $Z$, and $W$ from a $\text{Uniform}(0, 1)$ distribution to create the covariates. Using other distributions does not impact the results. Introducing correlations between the covariates does not impact the results.
+\item As $\beta_W$ ranges from -1 to 1, do the following:
+	\begin{enumerate}
+	\item Compute $\pi = \text{Pr}(Y)$.
+	\item To get an estimate of the expected value of the estimated effect of $W$, do the following 100,000 times.
+		\begin{enumerate}
+		\item Simulate $Y \sim \text{Bernoulli}(\pi)$.
+		\item Estimate a logistic regression model with and without a product term.
+		\item Store the coefficient for $W$.
+		\item Calculate and store the first difference $\text{Pr}(Y | W = 0.75) - \text{Pr}(Y | W = 0.25)$.
+		
+		\end{enumerate}
+	\item Calculate the mean of the estimated coefficients.
+	\item Calculate the mean of the estimated first-differences
+	\end{enumerate}
+\end{enumerate}
+
+As Figure \ref{fig:w-est} shows, the estimates of $\beta_W$ are not affected by the inclusions of an unnecessary product term. Particularly, there is no bias in either estimate. The mean estimates from the model with and without a product term entirely overlap with the true values. Figure \ref{fig:w-td} shows that the same hold for the first difference.
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale = .8]{fig/fig-w-est.pdf}
+\end{center}\caption{A figure showing the expected coefficient $E(\hat{\beta_W})$ as the true coefficient $\beta_W$ changes for the models with and without a product term. Note that all three overlap exactly, which means that including a product term does not bias the coefficients of other explanatory variables.}\label{fig:w-est}
+\end{figure}
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale = .8]{fig/fig-w-fd.pdf}
+\end{center}\caption{A figure showing the expected estimate of the first-difference as the true first-difference changes for the models with and without a product term. Note that all three overlap exactly, which means that including a product term does not bias the first-differences of other explanatory variables.}\label{fig:w-fd}
 \end{figure}
 
 \section*{Replication of the Fixed Process Simulation for Rare Events}
