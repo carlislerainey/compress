@@ -53,16 +53,16 @@ curve(beta[1] + beta[2]*x, lty = 3, add = TRUE)
 curve(beta[1] + beta[2]*x + beta[3], lty = 3, add = TRUE)
 text(.2, .4, "Z = 0")
 text(.2, .1, "Z = 1")
-lines(c(.25, .75), c(f(.25, 1), f(.25, 1)))
-lines(c(.75, .75), c(f(.25, 1), f(.75, 1)))
-text(.89, mean(c(f(.75, 1), f(.25, 1))), 
-     paste("Change in\nPr(Y) =", f(.75, 1) - f(.25, 1)), 
-     cex = .95)
-lines(c(.25, .75), c(f(.25, 0), f(.25, 0)))
-lines(c(.75, .75), c(f(.25, 0), f(.75, 0)))
-text(.89, mean(c(f(.75, 0), f(.25, 0))), 
-     paste("Change in\nPr(Y) =", f(.75, 0) - f(.25, 0)), 
-     cex = .95)
+# lines(c(.25, .75), c(f(.25, 1), f(.25, 1)))
+# lines(c(.75, .75), c(f(.25, 1), f(.75, 1)))
+# text(.89, mean(c(f(.75, 1), f(.25, 1))), 
+#      paste("Change in\nPr(Y) =", f(.75, 1) - f(.25, 1)), 
+#      cex = .95)
+# lines(c(.25, .75), c(f(.25, 0), f(.25, 0)))
+# lines(c(.75, .75), c(f(.25, 0), f(.75, 0)))
+# text(.89, mean(c(f(.75, 0), f(.25, 0))), 
+#      paste("Change in\nPr(Y) =", f(.75, 0) - f(.25, 0)), 
+#      cex = .95)
 
 
 
@@ -71,34 +71,34 @@ curve(beta[1] + beta[2]*x, lty = 3, add = TRUE)
 curve(beta[1] + beta[2]*x + beta[3], lty = 3, add = TRUE)
 curve(plogis(beta1[1] + beta1[2]*x), lty = 1, lwd = 2, add = TRUE)
 curve(plogis(beta1[1] + beta1[2]*x + beta1[3]), lty = 1, lwd = 2, add = TRUE)
-lines(c(.25, .75), c(f1(.25, 1), f1(.25, 1)))
-lines(c(.75, .75), c(f1(.25, 1), f1(.75, 1)))
-text(.89, mean(c(f1(.75, 1), f1(.25, 1))), 
-     paste("Change in\nPr(Y) =", 
-           round(f1(.75, 1) - f1(.25, 1), 2)), 
-     cex = .95)
-lines(c(.25, .75), c(f1(.25, 0), f1(.25, 0)))
-lines(c(.75, .75), c(f1(.25, 0), f1(.75, 0)))
-text(.89, mean(c(f1(.75, 0), f1(.25, 0))), 
-     paste("Change in\nPr(Y) =", 
-           round(f1(.75, 0) - f1(.25, 0), 2)), 
-     cex = .95)
+# lines(c(.25, .75), c(f1(.25, 1), f1(.25, 1)))
+# lines(c(.75, .75), c(f1(.25, 1), f1(.75, 1)))
+# text(.89, mean(c(f1(.75, 1), f1(.25, 1))), 
+#      paste("Change in\nPr(Y) =", 
+#            round(f1(.75, 1) - f1(.25, 1), 2)), 
+#      cex = .95)
+# lines(c(.25, .75), c(f1(.25, 0), f1(.25, 0)))
+# lines(c(.75, .75), c(f1(.25, 0), f1(.75, 0)))
+# text(.89, mean(c(f1(.75, 0), f1(.25, 0))), 
+#      paste("Change in\nPr(Y) =", 
+#            round(f1(.75, 0) - f1(.25, 0), 2)), 
+#      cex = .95)
 
 aplot("Logistic Regression Fit\n with Product Term Included")
 curve(beta[1] + beta[2]*x, lty = 3, add = TRUE)
 curve(beta[1] + beta[2]*x + beta[3], lty = 3, add = TRUE)
 curve(plogis(beta2[1] + beta2[2]*x), lty = 1, lwd = 2, add = TRUE)
 curve(plogis(beta2[1] + beta2[2]*x + beta2[3] + beta2[4]*x), lty = 1, lwd = 2, add = TRUE)
-lines(c(.25, .75), c(f2(.25, 1), f2(.25, 1)))
-lines(c(.75, .75), c(f2(.25, 1), f2(.75, 1)))
-text(.89, mean(c(f2(.75, 1), f2(.25, 1))), 
-     paste("Change in\nPr(Y) =", 
-           round(f2(.75, 1) - f2(.25, 1), 2)), 
-     cex = .95)
-lines(c(.25, .75), c(f2(.25, 0), f2(.25, 0)))
-lines(c(.75, .75), c(f2(.25, 0), f2(.75, 0)))
-text(.89, mean(c(f2(.75, 0), f2(.25, 0))), 
-     paste("Change in\nPr(Y) =", 
-           round(f2(.75, 0) - f2(.25, 0), 2)), 
-     cex = .95)
+# lines(c(.25, .75), c(f2(.25, 1), f2(.25, 1)))
+# lines(c(.75, .75), c(f2(.25, 1), f2(.75, 1)))
+# text(.89, mean(c(f2(.75, 1), f2(.25, 1))), 
+#      paste("Change in\nPr(Y) =", 
+#            round(f2(.75, 1) - f2(.25, 1), 2)), 
+#      cex = .95)
+# lines(c(.25, .75), c(f2(.25, 0), f2(.25, 0)))
+# lines(c(.75, .75), c(f2(.25, 0), f2(.75, 0)))
+# text(.89, mean(c(f2(.75, 0), f2(.25, 0))), 
+#      paste("Change in\nPr(Y) =", 
+#            round(f2(.75, 0) - f2(.25, 0), 2)), 
+#      cex = .95)
 dev.off()
