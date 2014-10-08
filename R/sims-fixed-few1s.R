@@ -8,6 +8,9 @@ rm(list = ls())
 library(arm)
 library(MASS)
 
+# set simulation parameters
+n.sims1 <- 10
+n.sims2 <- 10
 
 genBeta <- function() {
   p1 <-  c(.04, .08)
@@ -69,8 +72,6 @@ prod.res <- array(NA,
   dim = c(length(sample.size), length(dist.x.names), length(change.x.names)))
 noprod.res <- array(NA, 
   dim = c(length(sample.size), length(dist.x.names), length(change.x.names)))
-n.sims1 <- 2
-n.sims2 <- 2
 
 ## Run Loop
 

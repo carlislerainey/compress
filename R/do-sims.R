@@ -14,5 +14,5 @@ dir.create(path = "output", showWarnings = FALSE)
 # Do each simulation
 source("R/sims-fixed.R", echo = TRUE)
 source("R/sims-fixed-few1s.R", echo = TRUE)
-#source("R/sims-fixed-generic.R", echo = TRUE)
-#source("R/sims-pwr.R", echo = TRUE)
+source("R/sims-generic.R", echo = TRUE)
+source("R/sims-pwr.R", echo = TRUE)

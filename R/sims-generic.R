@@ -7,8 +7,8 @@ rm(list = ls())
 
 # Set simulation paramters
 n.iter <- 10
-n.sims1 <- 2
-n.sims2 <- 2
+n.sims1 <- 10
+n.sims2 <- 10
 
 # Load packages
 library(arm)
