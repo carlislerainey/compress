@@ -6,8 +6,8 @@
 rm(list = ls())
 
 # Set simulation parameters
-n.sims1 <- 10
-n.sims2 <- 10
+n.sims1 <- 2000
+n.sims2 <- 2000
 
 # Load packages
 library(arm)

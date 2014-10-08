@@ -9,8 +9,8 @@ library(arm)
 library(MASS)
 
 # set simulation parameters
-n.sims1 <- 10
-n.sims2 <- 10
+n.sims1 <- 2000
+n.sims2 <- 2000
 
 genBeta <- function() {
   p1 <-  c(.04, .08)

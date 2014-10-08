@@ -6,9 +6,9 @@
 rm(list = ls())
 
 # Set simulation paramters
-n.iter <- 10
-n.sims1 <- 10
-n.sims2 <- 10
+n.iter <- 1000
+n.sims1 <- 2000
+n.sims2 <- 2000
 
 # Load packages
 library(arm)
