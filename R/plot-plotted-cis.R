@@ -1,11 +1,6 @@
 # Make sure that working directory is set properly, e.g.,
 # setwd("~/Dropbox/projects/compress/")
 
-# Clear workspace
-rm(list = ls())
-
-library(arm)
-
 n <- 1000
 n.sims <- 50
 x <- rbeta(n, 1, 1)

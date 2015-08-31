@@ -2,9 +2,6 @@
 # Make sure that working directory is set properly, e.g.,
 # setwd("~/Dropbox/projects/compress/")
 
-# Clear workspace
-rm(list = ls())
-
 # a function to randomly create a relationship
 genBeta <- function() {
   a <- runif(1, .3, .7)

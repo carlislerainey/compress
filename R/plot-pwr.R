@@ -2,17 +2,8 @@
 # Make sure that working directory is set properly, e.g.,
 # setwd("~/Dropbox/projects/compress/")
 
-# Clear workspace
-rm(list = ls())
-
 # Load the simulations.
 load("output/sims-pwr.RData")
-
-# Install the local verson of compactr to allow for log scales on the x-axis
-library(devtools)
-install_github(repo = "compactr", 
-               username = "carlislerainey")
-library(compactr)
 
 ###############################################################################
 ## Draw the plot
@@ -28,7 +19,7 @@ beta.x <- c(.75, 1.5, 3)
 beta.z <- c(.75, 1.5, 3)
 sample.size <- round(exp(seq(log(100), log(100000), length.out = 10)))
 
-pdf("doc/fig/pwr.pdf", height = 4, width = 8, family = "serif")
+pdf("doc/fig/fig-pwr.pdf", height = 4, width = 8, family = "serif")
 par(mfrow = c(length(beta.z), length(beta.x)), xlog = T,
     oma = c(3,8,4,1), mar = c(.5,1,1,1), family = "serif")
 

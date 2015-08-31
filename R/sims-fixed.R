@@ -2,17 +2,7 @@
 # Make sure that working directory is set properly, e.g.,
 # setwd("~/Dropbox/projects/compress/")
 
-# Clear workspace
-rm(list = ls())
-
-library(arm)
-library(MASS)
-
-# simulation paramaters
-n.sims1 <- 2000
-n.sims2 <- 2000
-
-
+# Function to generate fixed betas
 genBeta <- function() {
   p1 <-  c(.3, .5)
   p2 <- -.3

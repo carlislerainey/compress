@@ -19,14 +19,14 @@
 %\usepackage{hypdvips}
 \hypersetup{
  pdftitle={Compression and Conditional Effects}, % title
- pdfauthor={Redacted}, %Carlisle Rainey}, % author
+ pdfauthor={Carlisle Rainey}, % author
  pdfkeywords={hypothesis testing}{interaction term}{product term}{interaction}{logit} {probit} {logisitic regression}
  pdfnewwindow=true, % links in new window
  colorlinks=true, % false: boxed links; true: colored links
- linkcolor=BrickRed, % color of internal links
- citecolor=BrickRed, % color of links to bibliography
- filecolor=BrickRed, % color of file links
- urlcolor=BrickRed % color of external links
+ linkcolor=black, % color of internal links
+ citecolor=black, % color of links to bibliography
+ filecolor=black, % color of file links
+ urlcolor=blue % color of external links
 }
 \usepackage{url}
 \usepackage{natbib}
@@ -98,7 +98,7 @@
 
 \normalsize{\textbf{A Product Term Is Essential When Using Logistic Regression to Test for Interaction}}\\\vspace{4mm}
 
-\normalsize{\textsc{Carlisle Rainey\symbolfootnote[2]{Carlisle Rainey is Assistant Professor of Political Science, University at Buffalo, SUNY, 520 Park Hall, Buffalo, NY 14260 (\href{mailto:rcrainey@buffalo.edu}{rcrainey@buffalo.edu}).}}}\\\vspace{2mm}
+\normalsize{\textsc{Carlisle Rainey\symbolfootnote[2]{Carlisle Rainey is Assistant Professor of Political Science, Texas A\&M University, 2010 Allen Building, College Station, TX, 77843 (\href{mailto:crainey@tamu.edu}{crainey@tamu.edu}).}}}\\\vspace{2mm}
 \end{center}
 
 \thispagestyle{empty}
@@ -320,7 +320,7 @@ Figure \ref{fig:scatter} directly compares the two approaches. Notice that every
  
 \begin{figure}[H]
 \begin{center}
-\includegraphics[scale = .9]{fig/fig-scatter2.pdf}
+\includegraphics[scale = .9]{fig/fig-scatter.pdf}
 \end{center}\caption{This figure shows the probability of concluding interaction when none exists from logistic regression models with and without a product term for many different analyses. Notice that many points fall away from the vertical line at 0.05 indicating poor performance of models without a product term. Also notice that most points fall near the horizontal line at 0.05, indicating that models with a product term tend to perform well. Finally, notice that  all points fall below the diagonal line, indicating that models without a product term are more likely to mislead researchers in every simulated analysis.}\label{fig:scatter}
 \end{figure}
 

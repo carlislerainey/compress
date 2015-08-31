@@ -2,17 +2,8 @@
 # Make sure that working directory is set properly, e.g.,
 # setwd("~/Dropbox/projects/compress/")
 
-# Clear workspace
-rm(list = ls())
-
 # Load the simulations.
 load("output/sims-fixed.RData")
-
-# Install the local verson of compactr to allow for log scales on the x-axis
-library(devtools)
-install_github(repo = "compactr", 
-               username = "carlislerainey")
-library(compactr)
 
 ###############################################################################
 ## Draw the plot
@@ -59,29 +50,4 @@ for (dist in 1:length(dist.x.names)) {
     lines(n, p.prod, lwd = 2, lty = 2)
   }
 }
-dev.off()
-
-pdf("doc/fig/fig-example-cis.pdf", height = 4, width = 9, horizontal = F, family = "serif")
-par(mfrow = c(1,2), family = "serif")
-ci1 <- res[order(res[, 4]), 3:5]
-ci2 <- res[order(res[, 7]), 6:8]
-xlim.set <- c(0, ci1, ci2, -ci1, - ci2)
-main <- paste("Excluding Product Term\n(",sum(res[,1])/n.sims
-              *100, "% statistically significant)", sep = "")
-eplot(xlim = mm(xlim.set), ylim = c(1, nrow(ci1)),
-      anny = FALSE, xlab = "Second Difference",
-      main = main)
-for (i in 1:nrow(ci1)) {
-  lines(c(ci1[i,1], ci1[i,3]), c(i, i), col = "grey")
-}
-points(ci1[,2], 1:nrow(ci1), pch = 19, cex = .5)
-abline(v = 0, lty = 2)
-main <- paste("Including Product Term\n(",sum(res[,2])/n.sims
-              *100, "% statistically significant)", sep = "")
-aplot(main)
-for (i in 1:nrow(ci1)) {
-  lines(c(ci2[i,1], ci2[i,3]), c(i, i), col = "grey")
-}
-points(ci2[,2], 1:nrow(ci1), pch = 19, col = "red", cex = .5)
-abline(v = 0, lty = 2)
 dev.off()

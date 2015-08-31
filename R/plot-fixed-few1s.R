@@ -2,17 +2,8 @@
 # Make sure that working directory is set properly, e.g.,
 # setwd("~/Dropbox/projects/compress/")
 
-# Clear workspace
-rm(list = ls())
-
 # Load the simulations.
 load("output/sims-fixed-few1s.RData")
-
-# Install the local verson of compactr to allow for log scales on the x-axis
-library(devtools)
-install_github(repo = "compactr", 
-               username = "carlislerainey")
-library(compactr)
 
 ###############################################################################
 ## Draw the plot

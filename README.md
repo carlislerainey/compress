@@ -6,16 +6,14 @@ If you have any comments or suggestion, please [open an issue](https://github.co
 
 To replicate all the results, simply [download](https://github.com/carlislerainey/compress/archive/master.zip) the directory, and run the files
 
-* `do-sims.R`, which performs all the Monte Carlo simulations.
-* `do-plots.R`, which creates all the plots related to the MC simulations.
-* `or-replication.R`, which does all the computation and plots from the Oneal and Russett replication.
+* `do-all.R`, which performs all the Monte Carlo simulations, creates the plots, and does the Oneal and Russet replication.
 
 Note that the simulation take a very long time to run. If you like, you can tradeoff the speed and precision of the simulations by changing the lines
 
     # Set simulation parameters
     n.sims1 <- 2000
     n.sims2 <- 2000
-    
-in the files `sims-*.R`. `n.sims1` controls the number of times to compute each confidence interval to compute the probability of covering the true value. `n.sims2` controls the number of simulations used to construct each confidence interval. Also, in the file `sims-generic.R`, the parameter `niter` controls the number of random DGPs to compute.
+
+in the file `do-all.R`. `n.sims1` controls the number of times to compute each confidence interval to compute the probability of covering the true value. `n.sims2` controls the number of simulations used to construct each confidence interval. Also, in the file `sims-generic.R`, the parameter `niter` controls the number of random DGPs to compute.
 
 Note that I did some post-editing on the figures in order to clearly annotate relevant information. I did this in [Inkscape](http://www.inkscape.org/en/).

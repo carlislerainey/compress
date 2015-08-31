@@ -2,11 +2,6 @@
 # Make sure that working directory is set properly, e.g.,
 # setwd("~/Dropbox/projects/compress/")
 
-# Clear workspace
-rm(list = ls())
-
-library(compactr)
-
 n <- 1000
 b.w <- seq(-1, 1, length.out = 5)
 mu.fd1 <- mu.fd2 <- true.fd <- numeric(length(b.w))
@@ -30,11 +25,10 @@ X.pred <- cbind(0, 0, c(.25, .75))
 colnames(X.pred) <- c("x", "z", "w")
 X.pred <- data.frame(X.pred)
 
-n.sims <- 10000
-fd1 <- fd2 <- numeric(n.sims)
-est1 <- est2 <- numeric(n.sims)
-pb <- txtProgressBar(min = 0, max = n.sims, style = 3)
-for (i in 1:n.sims) {
+fd1 <- fd2 <- numeric(n.sims1)
+est1 <- est2 <- numeric(n.sims1)
+pb <- txtProgressBar(min = 0, max = n.sims1, style = 3)
+for (i in 1:n.sims1) {
   y <- rbinom(n, 1, p)
   m1 <- glm(y ~ x + z + w, family = binomial)
   m2 <- glm(y ~ x*z + w, family = binomial)

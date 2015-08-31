@@ -2,18 +2,6 @@
 # Make sure that working directory is set properly, e.g.,
 # setwd("~/Dropbox/projects/compress/")
 
-# Clear workspace
-rm(list = ls())
-
-# Set simulation paramters
-n.iter <- 1000
-n.sims1 <- 2000
-n.sims2 <- 2000
-
-# Load packages
-library(arm)
-library(MASS)
-library(compactr)
 format(Sys.time(), "%H:%M:%S")
 
 # a function to randomly create a relationship
@@ -143,8 +131,8 @@ for (iter in 1:n.iter) {
   }
   # simulate the size
   res1 <- simulate.p()
-  noprod <- sum(res[,1])/n.sims1
-  prod <- sum(res[,2])/n.sims1
+  noprod <- sum(res1[,1])/n.sims1
+  prod <- sum(res1[,2])/n.sims1
   # write a row to the data set  
   res2 <- c(n, binary.x, binary.z, alpha.x, beta.x, alpha.z,
                   beta.z, prob.x, prob.z, lo.x, hi.x, lo.z, hi.z, 

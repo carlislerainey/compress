@@ -2,9 +2,6 @@
 # Make sure that working directory is set properly, e.g.,
 # setwd("~/Dropbox/projects/compress/")
 
-# Clear workspace
-rm(list = ls())
-
 set.seed(4709901)
 n <- 1000000
 x <- runif(n)

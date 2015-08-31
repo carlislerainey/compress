@@ -2,17 +2,6 @@
 # Make sure that working directory is set properly, e.g.,
 # setwd("~/Dropbox/projects/compress/")
 
-# Clear workspace
-rm(list = ls())
-
-# Set simulation parameters
-n.sims1 <- 2000
-n.sims2 <- 2000
-
-# Load packages
-library(arm)
-library(MASS)
-
 ## Setup Simulate Function
 simulate.p <- function(n.sims1, n.sims2) {
   res <- matrix(NA, nrow = n.sims1, ncol = 2)      

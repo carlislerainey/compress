@@ -3,9 +3,6 @@
 # Make sure that working directory is set properly, e.g.,
 # setwd("~/Dropbox/projects/compress/")
 
-# Clear workspace
-rm(list = ls())
-
 load("output/sims-generic.RData")
 
 prod <- res[, "prod"]
