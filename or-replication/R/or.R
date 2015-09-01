@@ -1,10 +1,3 @@
-rm(list = ls())
-setwd("~/Dropbox/Projects/Compress")
-
-library(arm)
-library(compactr)
-library(foreign)
-library(texreg)
 
 # Data available at 
 #   http://pantheon.yale.edu/~brusset/io_dta.zip

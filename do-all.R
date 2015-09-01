@@ -6,20 +6,23 @@
 rm(list = ls())
 
 # Install the local verson of compactr to allow for log scales on the x-axis
-#install.packages("devtools")
+#install.packages("devtools", dependencies = "Depends")
 #devtools::install_github("carlislerainey/compactr")
 #install.packages("arm")
+# install.packages("texreg")
 
 # Load packages
 library(arm)
 library(MASS)
 library(compactr)
+library(foreign)
+library(texreg)
 
 # Set seed
 set.seed(892746)
 
 # Do simulations
-n.sims1 <- 10  # number of simulations used to compute size
+n.sims1 <- 2  # number of simulations used to compute size
 n.sims2 <- 10  # number of Clarify-like simulation used to compute each p-value
 n.iter <- 20  # number of generic DGPs to simulate
 source("R/do-sims.R")
