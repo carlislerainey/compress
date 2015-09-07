@@ -22,9 +22,9 @@ library(texreg)
 set.seed(892746)
 
 # Do simulations
-n.sims1 <- 2  # number of simulations used to compute size
-n.sims2 <- 10  # number of Clarify-like simulation used to compute each p-value
-n.iter <- 20  # number of generic DGPs to simulate
+n.sims1 <- 2000  # number of simulations used to compute size
+n.sims2 <- 2000  # number of Clarify-like simulation used to compute each p-value
+n.iter <- 1000  # number of generic DGPs to simulate
 source("R/do-sims.R")
 
 # Do plots

@@ -22,7 +22,7 @@ change.x <- list(c(.25, .75), c(0,1), c(.05, .15))
 sample.size <- round(exp(seq(log(100), log(100000), length.out = 10)))
 
 svg("doc/fig/fig-fixed.svg", height = 4, width = 8, family = "serif")
-par(mfrow = c(length(change.x.names), length(dist.x.names)), xlog = T,
+par(mfrow = c(length(change.x.names), length(dist.x.names)),
     oma = c(3,14,5,1), mar = c(.5,1,.5,1), family = "serif")
 
 
