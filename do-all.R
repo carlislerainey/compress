@@ -7,7 +7,7 @@ rm(list = ls())
 
 # Install the local verson of compactr to allow for log scales on the x-axis
 #install.packages("devtools", dependencies = "Depends")
-#devtools::install_github("carlislerainey/compactr")
+#devtools::install_github("carlislerainey/compactr@v2.1")
 #install.packages("arm")
 # install.packages("texreg")
 
